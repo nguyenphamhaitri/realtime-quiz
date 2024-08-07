@@ -1,19 +1,13 @@
 import mongoose, { Document, Schema } from 'mongoose';
 
-interface IQuestion extends Document {
-  quizId: mongoose.Schema.Types.ObjectId;
-  questionText: string;
+export interface IQuestion extends Document {
+  text: string;
   options: string[];
   answer: string;
 }
 
 const QuestionSchema: Schema = new Schema({
-  quizId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Quiz',
-    required: true,
-  },
-  questionText: {
+  text: {
     type: String,
     required: true,
   },

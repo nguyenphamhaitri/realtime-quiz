@@ -3,7 +3,7 @@ import http from 'http';
 import dotenv from 'dotenv';
 import { Server } from 'socket.io';
 import connectDB from './config/db';
-import quizRoutes from './routes/quiz.router';
+import questionRoutes from './routes/question.router';
 import userRoutes from './routes/user.router';
 import cors from 'cors';
 import { connectSocket } from './config/socket';
@@ -23,8 +23,27 @@ connectSocket(server);
 app.use(express.json());
 app.use(cors());
 
+// Log
+app.use((req, res, next) => {
+  var method = req.method;
+  switch (method) {
+    case 'POST':
+    case 'PUT':
+      console.log(`${req.method} ${req.url} ${JSON.stringify(req.body)}`);
+      break;
+    case 'GET':
+    case 'DELETE':
+      console.log(`${req.method} ${req.url} ${JSON.stringify(req.query)}`);
+      break;
+    default:
+      break;
+  }
+
+  next();
+});
+
 // Routes
-app.use('/api/v1/quizzes', quizRoutes);
+app.use('/api/v1/questions', questionRoutes);
 app.use('/api/v1/users', userRoutes);
 
 // Custom error handling

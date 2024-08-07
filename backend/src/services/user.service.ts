@@ -10,7 +10,7 @@ class UserService {
   public static get instance() {
     return this._instance || (this._instance = new this());
   }
-  register = async (username: string, password: string) => {
+  public async register(username: string, password: string) {
     const existed = await User.findOne({ username });
     if (existed) {
       throw new Error('username is existed.');
@@ -19,8 +19,8 @@ class UserService {
     const user = new User({ username, password: hashedPassword });
     await user.save();
     return new UserDto(user);
-  };
-  login = async (username: string, password: string) => {
+  }
+  public async login(username: string, password: string) {
     const user = await User.findOne({ username });
     if (!user) {
       throw new Error('user is not found.');
@@ -34,7 +34,7 @@ class UserService {
       { expiresIn: JWT_EXPIRY },
     );
     return { token, user: new UserDto(user) };
-  };
+  }
 }
 
 export const userService = UserService.instance;

@@ -3,6 +3,8 @@ import { checkSchema } from 'express-validator';
 export const SchemaRegister = checkSchema({
   username: {
     in: ['body'],
+    isString: true,
+    trim: true,
     isLength: {
       bail: true,
       options: { min: 5, max: 20 },
@@ -11,6 +13,7 @@ export const SchemaRegister = checkSchema({
   },
   password: {
     in: ['body'],
+    isString: true,
     isLength: {
       bail: true,
       options: { min: 6, max: 20 },
