@@ -51,7 +51,7 @@
 | - Leaderboard     |               | - Quiz Management |          | - Scores          |
 | - Login/Register  |               +-------------------+          +-------------------+
 +-------------------+               |   WebSockets      |          |    Quizzes        |
-                                    | - Real-Time Comm  |          | - Quiz Details    |
+                                    | - Real-Time Comm  |          | - Quiz            |
                                     | - Join Quiz       |          | - Questions       |
                                     | - Submit Answer   |          | - Answers         |
                                     | - Leaderboard     |          +-------------------+
