@@ -1,0 +1,27 @@
+// Define colors and animation duration in variables
+$color-start: #003357;
+$color-end: #00245b;
+$animation-duration: 3s;
+
+// Mixin for background color animation
+@mixin background-color-animation($start-color, $end-color, $duration) {
+  @keyframes bg-color-change {
+    0% {
+      background-color: $start-color;
+    }
+    100% {
+      background-color: $end-color;
+    }
+  }
+
+  animation: bg-color-change $duration infinite alternate;
+}
+
+// Apply the mixin to a class
+.animated-background {
+  @include background-color-animation(
+    $color-start,
+    $color-end,
+    $animation-duration
+  );
+}

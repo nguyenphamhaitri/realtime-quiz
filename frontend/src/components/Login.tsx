@@ -1,8 +1,17 @@
 // src/components/Login.tsx
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Box, Button, FormControl, FormLabel, Input } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  FormControl,
+  FormLabel,
+  Input,
+  Stack,
+} from '@chakra-ui/react';
 import { UserApi } from 'apis/userApi';
+import CustomInput from './ui/CustomInput';
+import CustomButton from './ui/CustomButton';
 
 const Login: React.FC = () => {
   const dispatch = useDispatch();
@@ -16,29 +25,22 @@ const Login: React.FC = () => {
   };
 
   return (
-    <Box maxW="md" mx="auto" mt="8">
+    <Box>
       <form onSubmit={handleSubmit}>
-        <FormControl id="email" mb="4">
-          <FormLabel>Username</FormLabel>
-          <Input
-            type="username"
+        <Stack direction="row" spacing="1rem" alignItems="center">
+          <CustomInput
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            placeholder="username"
+            placeholder="Username"
           />
-        </FormControl>
-        <FormControl id="password" mb="4">
-          <FormLabel>Password</FormLabel>
-          <Input
+          <CustomInput
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
           />
-        </FormControl>
-        <Button type="submit" colorScheme="teal">
-          Login
-        </Button>
+          <CustomButton type="submit">Login</CustomButton>
+        </Stack>
       </form>
     </Box>
   );

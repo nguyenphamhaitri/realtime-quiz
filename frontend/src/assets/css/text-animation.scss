@@ -1,0 +1,23 @@
+// Define colors, scale values, and animation duration
+$scale-start: 1;
+$scale-end: 1.1;
+$animation-duration: 2s;
+
+// Mixin for text color and scale animation
+@mixin text-animation($scale-start, $scale-end, $duration) {
+  @keyframes text-change {
+    0% {
+      transform: scale($scale-start);
+    }
+    100% {
+      transform: scale($scale-end);
+    }
+  }
+
+  animation: text-change $duration infinite alternate;
+}
+
+// Apply the mixin to a class
+.animated-text {
+  @include text-animation($scale-start, $scale-end, $animation-duration);
+}

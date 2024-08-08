@@ -1,14 +1,13 @@
-import App from 'App';
-import Login from 'pages/Login';
-import { createBrowserRouter } from 'react-router-dom';
+import Home from 'pages/Home';
+import { createBrowserRouter, Navigate } from 'react-router-dom';
 
 export const router = createBrowserRouter([
   {
-    path: '/',
-    element: <App />,
+    path: '',
+    element: <Home />,
   },
   {
-    path: '/login',
-    element: <Login />,
+    path: '*',
+    element: <Navigate to="" />,
   },
 ]);

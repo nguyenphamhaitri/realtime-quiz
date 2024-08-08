@@ -3,14 +3,18 @@ import { Provider } from 'react-redux';
 import { RouterProvider } from 'react-router-dom';
 import { router } from 'router';
 import { store } from 'store';
+import 'assets/css/index.scss';
 import reportWebVitals from './reportWebVitals';
+import Layout from 'components/Layout';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 root.render(
   <Provider store={store}>
-    <RouterProvider router={router} />
+    <Layout>
+      <RouterProvider router={router} />
+    </Layout>
   </Provider>,
 );
 
