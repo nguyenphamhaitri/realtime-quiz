@@ -29,3 +29,17 @@ body {
   margin: 0;
   padding: 0;
 }
+
+.stretched-text {
+  font-size: 1.75rem;
+  font-weight: bold;
+  letter-spacing: 0.2rem;
+  word-spacing: 0.5rem;
+  text-align: center;
+}
+
+.stretched-text::after {
+  content: '';
+  display: inline-block;
+  width: 100%;
+}

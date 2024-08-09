@@ -1,17 +1,9 @@
-// src/components/Login.tsx
+import { Box, Stack } from '@chakra-ui/react';
+import { useDispatch } from 'hooks';
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import {
-  Box,
-  Button,
-  FormControl,
-  FormLabel,
-  Input,
-  Stack,
-} from '@chakra-ui/react';
-import { UserApi } from 'apis/userApi';
-import CustomInput from './ui/CustomInput';
-import CustomButton from './ui/CustomButton';
+import { login } from 'store/slices/userSlice';
+import CustomButton from './widgets/CustomButton';
+import CustomInput from './widgets/CustomInput';
 
 const Login: React.FC = () => {
   const dispatch = useDispatch();
@@ -20,8 +12,7 @@ const Login: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(username + '-' + password);
-    console.log(await UserApi.login(username, password));
+    dispatch(login({ username, password }));
   };
 
   return (

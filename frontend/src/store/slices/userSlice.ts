@@ -1,17 +1,19 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { UserApi } from 'apis/userApi';
 import { User } from 'models/user';
 
 interface IUserState {
-  currentUser: User | undefined;
+  currentUser?: User;
+  accessToken?: string;
 }
 
-const initialState: IUserState = {
-  currentUser: undefined,
-};
+const initialState: IUserState = {};
 
 export const login = createAsyncThunk(
   'user/login',
-  async ({ username, password }: { username: string; password: string }) => {},
+  async ({ username, password }: { username: string; password: string }) => {
+    return (await UserApi.login(username, password)).data;
+  },
 );
 
 const userSlice = createSlice({
@@ -21,14 +23,19 @@ const userSlice = createSlice({
     setCurrentUser(state, action: PayloadAction<User | undefined>) {
       state.currentUser = action.payload;
     },
+    logout(state) {
+      state.currentUser = undefined;
+      state.accessToken = undefined;
+    },
   },
   extraReducers: (builder) => {
-    builder
-      .addCase(login.pending, (state) => {})
-      .addCase(login.fulfilled, (state) => {})
-      .addCase(login.rejected, (state) => {});
+    builder.addCase(login.fulfilled, (state, action) => {
+      const { token, user } = action.payload;
+      state.currentUser = user;
+      state.accessToken = token;
+    });
   },
 });
 
-export const { setCurrentUser } = userSlice.actions;
+export const { setCurrentUser, logout } = userSlice.actions;
 export default userSlice.reducer;

@@ -1,6 +1,11 @@
 import { Box, Flex, Text } from '@chakra-ui/react';
+import InputName from './InputName';
+import useAuth from 'hooks/useAuth';
+import InputQuiz from './InputQuiz';
 
 export default function Home() {
+  const { isLoggedIn } = useAuth();
+
   return (
     <Flex
       className="animated-background"
@@ -8,15 +13,17 @@ export default function Home() {
       flexGrow={4}
       alignItems="center"
       justifyContent="center"
+      direction="column"
     >
       <Text
         className="animated-text"
-        fontSize="3rem"
+        fontSize="2.7rem"
         fontWeight="bold"
         color="#fff"
       >
-        Real-Time Vocabulary Quiz Coding Challenge
+        Welcome to Real-Time Vocabulary Quiz Coding Challenge
       </Text>
+      {isLoggedIn ? <InputQuiz /> : <InputName />}
     </Flex>
   );
 }

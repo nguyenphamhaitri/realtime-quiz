@@ -5,17 +5,20 @@ import {
   Input,
   InputProps,
   FormErrorMessage,
+  TextProps,
 } from '@chakra-ui/react';
 
 interface CustomInputProps extends InputProps {
   label?: string;
   errorMessage?: string;
+  placeHolderCss?: TextProps;
 }
 
 const CustomInput: React.FC<CustomInputProps> = ({
   label,
   errorMessage,
   isInvalid,
+  placeHolderCss,
   ...props
 }) => {
   return (
@@ -27,7 +30,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
         border="1px solid #ccc"
         boxShadow="none"
         p="0.5rem"
-        _placeholder={{ color: '#ccc' }}
+        _placeholder={{ color: '#ccc', ...placeHolderCss }}
         _focus={{
           borderColor: 'blue.500',
           boxShadow: 'outline',

@@ -1,7 +1,16 @@
-import { Box, Flex, Text } from '@chakra-ui/react';
+import { Flex, Text } from '@chakra-ui/react';
+import useAuth from 'hooks/useAuth';
 import Login from './Login';
+import UserAvatar from './widgets/UserAvatar';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
+  const { isLoggedIn, currentUser } = useAuth();
+  const nav = useNavigate();
+  const handleClickLogo = () => {
+    nav('/');
+  };
+
   return (
     <Flex
       h="4rem"
@@ -9,15 +18,22 @@ const Header = () => {
       alignItems="center"
       px="1rem"
       justifyContent="space-between"
+      zIndex={1}
+      boxShadow="rgba(0, 0, 0, 0.1) 0px 4px 12px;"
     >
       <Flex className="logo">
-        <Text fontWeight="bold" fontSize="2rem">
+        <Text
+          fontWeight="bold"
+          fontSize="2rem"
+          userSelect="none"
+          cursor="pointer"
+          onClick={handleClickLogo}
+        >
           Realtime Quiz
         </Text>
       </Flex>
-      <Login />
+      {isLoggedIn ? <UserAvatar user={currentUser!} /> : <Login />}
     </Flex>
   );
 };
-
 export default Header;

@@ -15,8 +15,6 @@ const CustomButton: React.FC<CustomButtonProps> = ({ ...props }) => {
       bg="#003357"
       color="#DFDEDF"
       userSelect="none"
-      WebkitUserSelect="none"
-      touchAction="manipulation"
       boxShadow="0px 0.5px 1px rgba(0, 0, 0, 0.1), inset 0px 0.5px 0.5px rgba(255, 255, 255, 0.5), 0px 0px 0px 0.5px rgba(0, 0, 0, 0.12)"
       _focus={{
         boxShadow:
@@ -26,6 +24,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({ ...props }) => {
       _hover={{
         bg: '#00245b',
       }}
+      cursor="pointer"
       {...props}
     >
       {props.children}
