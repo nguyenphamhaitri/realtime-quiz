@@ -6,7 +6,7 @@ import connectDB from './config/db';
 import questionRoutes from './routes/question.router';
 import userRoutes from './routes/user.router';
 import cors from 'cors';
-import { connectSocket } from './config/socket';
+import { connectSocket } from './socket';
 
 dotenv.config();
 

@@ -1,4 +1,4 @@
-import { SchemaCreateQuestion, QuestionController } from 'controllers/question';
+import { QuizController, SchemaCreateQuiz } from 'controllers/quiz';
 import { Router } from 'express';
 import asyncHandler from 'middlewares/asyncHandler';
 import { validationResultMiddleware } from 'middlewares/validate';
@@ -7,11 +7,9 @@ const router = Router();
 
 router.post(
   '/',
-  SchemaCreateQuestion,
+  SchemaCreateQuiz,
   validationResultMiddleware,
-  asyncHandler(QuestionController.CreateQuestion),
+  asyncHandler(QuizController.createQuizSession),
 );
-
-router.get('/random', asyncHandler(QuestionController.GetRandomQuestions));
 
 export default router;
