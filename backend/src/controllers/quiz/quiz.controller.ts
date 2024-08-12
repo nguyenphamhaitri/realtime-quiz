@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
-import { handleCreateSession } from 'socket/session';
+import { handleCreateQuiz } from 'socket/quiz';
 
 export class QuizController {
-  public static async createQuizSession(request: Request, response: Response) {
-    const { name } = request.body;
-    const sessionId = await handleCreateSession(name);
-    response.status(201).json({ sessionId });
+  public static async createQuiz(request: Request, response: Response) {
+    const { username, name } = request.body;
+    const quizId = await handleCreateQuiz(username, name);
+    response.status(201).json({ quizId });
   }
 }

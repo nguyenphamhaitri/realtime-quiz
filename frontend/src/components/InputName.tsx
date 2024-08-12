@@ -1,3 +1,4 @@
+import { UserApi } from 'apis/userApi';
 import CustomButton from 'components/widgets/CustomButton';
 import CustomInput from 'components/widgets/CustomInput';
 import { useDispatch } from 'hooks';
@@ -10,7 +11,10 @@ export default function InputName() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    dispatch(setCurrentUser({ username: name }));
+    const guestId = await UserApi.generateGuestId(name);
+    const username = `${name} #${guestId}`;
+    setName(username);
+    dispatch(setCurrentUser({ username }));
   };
 
   return (

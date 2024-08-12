@@ -8,15 +8,14 @@ export class QuestionController {
   @Auth()
   @Roles('admin')
   public static async CreateQuestion(request: Request, response: Response) {
-    var question: QuestionDto = request.body;
-    var data = await questionService.createQuestion(question);
+    const question: QuestionDto = request.body;
+    const data = await questionService.createQuestion(question);
     response.status(201).json(data);
   }
 
-  @Auth()
   public static async GetRandomQuestions(request: Request, response: Response) {
-    var size = Number(request.query.size) || 10;
-    var data = await questionService.getRandomQuestions(size);
+    const size = Number(request.query.size) || 10;
+    const data = await questionService.getRandomQuestions(size);
     response.status(200).json(data);
   }
 }

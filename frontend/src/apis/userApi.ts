@@ -14,4 +14,10 @@ export class UserApi {
     username: string;
     password: string;
   }) {}
+
+  public static async generateGuestId(username: string) {
+    const res = await api.post(`${baseURL}/generate-guest-id`, { username });
+
+    return res.data?.id;
+  }
 }

@@ -35,7 +35,6 @@ const UserAvatar: React.FC<{ user: User }> = ({ user }: { user: User }) => {
               bgColor="#003357"
               borderRadius="50%"
               color="#fff"
-              name={user.username}
               cursor="pointer"
             />
             <Text m="0" fontSize=".75rem" cursor="pointer">

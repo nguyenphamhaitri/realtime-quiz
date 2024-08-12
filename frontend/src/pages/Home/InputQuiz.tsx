@@ -1,34 +1,51 @@
+import { Flex, FlexProps } from '@chakra-ui/react';
 import CustomButton from 'components/widgets/CustomButton';
 import CustomInput from 'components/widgets/CustomInput';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-export default function InputQuiz() {
-  const [name, setName] = useState('');
+const InputQuiz: React.FC<FlexProps> = (props) => {
+  const navigate = useNavigate();
+  const [quizId, setQuizId] = useState('');
+
+  const handleJoinQuiz = () => {
+    if (!!quizId) {
+      navigate(`/quiz/${quizId}`);
+    }
+  };
 
   return (
     <form>
-      <CustomInput
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        placeholder="Enter quiz"
-        className="stretched-text"
-        p="1rem"
-        w="25rem"
-      />
-      <CustomButton
-        m="auto"
-        mt="1rem"
-        type="submit"
-        bgColor="white"
-        color="#003357"
-        fontWeight="bold"
-        fontSize="1rem"
-        _hover={{
-          bgColor: '#ccc',
-        }}
+      <Flex
+        direction="column"
+        alignItems="center"
+        {...props}
+        justifyContent="center"
       >
-        Join!
-      </CustomButton>
+        <CustomInput
+          value={quizId}
+          onChange={(e) => setQuizId(e.target.value)}
+          placeholder="Enter quiz id"
+          className="stretched-text"
+          p="1rem"
+        />
+        <CustomButton
+          mt="1rem"
+          type="submit"
+          bgColor="white"
+          color="#003357"
+          fontWeight="bold"
+          fontSize="1rem"
+          _hover={{
+            bgColor: '#ccc',
+          }}
+          w="4rem"
+          onClick={handleJoinQuiz}
+        >
+          Join!
+        </CustomButton>
+      </Flex>
     </form>
   );
-}
+};
+export default InputQuiz;

@@ -1,4 +1,4 @@
-export function generateSessionId() {
+export function generateQuizId() {
   return `${generate4CharString()}-${generate4CharString()}-${generate4CharString()}-${generate4CharString()}`;
 }
 

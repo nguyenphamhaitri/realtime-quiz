@@ -21,4 +21,4 @@ const QuestionSchema: Schema = new Schema({
   },
 });
 
-export default mongoose.model<IQuestion>('Quiz', QuestionSchema);
+export default mongoose.model<IQuestion>('Question', QuestionSchema);

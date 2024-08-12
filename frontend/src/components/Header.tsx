@@ -6,9 +6,9 @@ import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const { isLoggedIn, currentUser } = useAuth();
-  const nav = useNavigate();
-  const handleClickLogo = () => {
-    nav('/');
+  const navigate = useNavigate();
+  const returnToHomePage = () => {
+    navigate('/');
   };
 
   return (
@@ -27,7 +27,7 @@ const Header = () => {
           fontSize="2rem"
           userSelect="none"
           cursor="pointer"
-          onClick={handleClickLogo}
+          onClick={returnToHomePage}
         >
           Realtime Quiz
         </Text>

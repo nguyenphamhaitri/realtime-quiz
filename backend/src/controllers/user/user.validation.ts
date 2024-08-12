@@ -40,3 +40,14 @@ export const SchemaLogin = checkSchema({
     },
   },
 });
+
+export const SchemaGenerateGuestId = checkSchema({
+  username: {
+    in: ['body'],
+    isLength: {
+      bail: true,
+      options: { min: 5, max: 20 },
+      errorMessage: 'username must have 5-20 characters.',
+    },
+  },
+});

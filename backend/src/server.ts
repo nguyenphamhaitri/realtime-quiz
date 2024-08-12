@@ -1,8 +1,8 @@
 import express, { NextFunction, Request, Response } from 'express';
 import http from 'http';
 import dotenv from 'dotenv';
-import { Server } from 'socket.io';
 import connectDB from './config/db';
+import quizzesRouter from './routes/quiz.router';
 import questionRoutes from './routes/question.router';
 import userRoutes from './routes/user.router';
 import cors from 'cors';
@@ -25,7 +25,7 @@ app.use(cors());
 
 // Log
 app.use((req, res, next) => {
-  var method = req.method;
+  const method = req.method;
   switch (method) {
     case 'POST':
     case 'PUT':
@@ -44,12 +44,13 @@ app.use((req, res, next) => {
 
 // Routes
 app.use('/api/v1/questions', questionRoutes);
+app.use('/api/v1/quizzes', quizzesRouter);
 app.use('/api/v1/users', userRoutes);
 
 // Custom error handling
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   if (err) {
-    var msg = { error: err.array ? err.array()[0].msg : err.message };
+    const msg = { error: err.array ? err.array()[0].msg : err.message };
     return res.status(400).json(msg);
   }
   return res.status(500).json({ message: 'Internal Server Error' });

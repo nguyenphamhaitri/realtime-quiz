@@ -1,9 +1,10 @@
-import { Box, Flex, Text } from '@chakra-ui/react';
-import InputName from './InputName';
+import { Flex, Stack, StackDivider, Text } from '@chakra-ui/react';
 import useAuth from 'hooks/useAuth';
 import InputQuiz from './InputQuiz';
+import CreateQuiz from './CreateQuiz';
+import InputName from '../../components/InputName';
 
-export default function Home() {
+export default function HomePage() {
   const { isLoggedIn } = useAuth();
 
   return (
@@ -23,7 +24,18 @@ export default function Home() {
       >
         Welcome to Real-Time Vocabulary Quiz Coding Challenge
       </Text>
-      {isLoggedIn ? <InputQuiz /> : <InputName />}
+      {isLoggedIn ? (
+        <Stack
+          direction="row"
+          divider={<StackDivider borderLeft="1px solid #fff" />}
+          spacing="6rem"
+          alignItems="center"
+        >
+          <InputQuiz w="20rem" /> <CreateQuiz w="20rem" />
+        </Stack>
+      ) : (
+        <InputName />
+      )}
     </Flex>
   );
 }

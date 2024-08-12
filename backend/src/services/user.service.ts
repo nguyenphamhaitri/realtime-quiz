@@ -35,6 +35,24 @@ class UserService {
     );
     return { token, user: new UserDto(user) };
   }
+
+  public async generateGuestId(username: string) {
+    const currentTime = Date.now();
+    const hashedString = await bcrypt.hash(`${username}${currentTime}`, 3);
+
+    let id = '';
+    for (let i = hashedString.length - 1, len = 0; len < 4 && i > 0; i--) {
+      if (/[0-9]/.test(hashedString[i])) {
+        id += hashedString[i];
+        len++;
+      }
+    }
+    while (id.length < 4) {
+      id += '0';
+    }
+
+    return id;
+  }
 }
 
 export const userService = UserService.instance;

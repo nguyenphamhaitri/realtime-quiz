@@ -1,4 +1,9 @@
-import { UserController, SchemaLogin, SchemaRegister } from 'controllers/user';
+import {
+  UserController,
+  SchemaLogin,
+  SchemaRegister,
+  SchemaGenerateGuestId,
+} from 'controllers/user';
 import { Router } from 'express';
 import asyncHandler from 'middlewares/asyncHandler';
 import { validationResultMiddleware } from 'middlewares/validate';
@@ -16,6 +21,13 @@ router.post(
   SchemaLogin,
   validationResultMiddleware,
   asyncHandler(UserController.login),
+);
+
+router.post(
+  '/generate-guest-id',
+  SchemaGenerateGuestId,
+  validationResultMiddleware,
+  asyncHandler(UserController.generateGuestId),
 );
 
 export default router;

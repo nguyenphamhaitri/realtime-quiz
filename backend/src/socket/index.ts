@@ -2,48 +2,49 @@ import { Server } from 'socket.io';
 import http from 'http';
 import {
   handleDisconnected,
-  handleJoinSession,
-  handleLeaveSession,
+  handleJoinQuiz,
+  handleLeaveQuiz,
   handleStartQuiz,
   handleSubmitAnswer,
-} from './session';
+} from './quiz';
 
-const io: Server | undefined = undefined;
+let io: Server | undefined = undefined;
 
 export const connectSocket = (server: http.Server) => {
-  const io = new Server(server);
+  io = new Server(server, {
+    cors: {
+      origin: '*',
+    },
+  });
   io.on('connection', (socket) => {
-    console.log('New client connected');
+    console.log('New client connected ', socket.id);
 
-    socket.on('joinSession', ({ sessionId, username }, callback) => {
-      handleJoinSession(
-        io,
-        { sessionId, username, socketId: socket.id },
-        callback,
-      );
+    socket.on('joinQuiz', ({ quizId, username }, callback) => {
+      socket.join(quizId);
+      handleJoinQuiz(io!, { quizId, username, socketId: socket.id }, callback);
     });
 
-    socket.on('leaveSession', ({ sessionId, username }) => {
-      handleLeaveSession(io, { sessionId, username });
+    socket.on('leaveQuiz', ({ quizId, username }) => {
+      handleLeaveQuiz(io!, { quizId, username });
     });
 
-    socket.on('startQuiz', (sessionId, callback) => {
-      handleStartQuiz(io, sessionId, callback);
+    socket.on('startQuiz', ({ quizId }, callback) => {
+      handleStartQuiz(io!, quizId, callback);
     });
 
     socket.on(
       'submitAnswer',
-      ({ sessionId, username, answer, questionIndex }, callback) => {
+      ({ quizId, username, answer, questionIndex }, callback) => {
         handleSubmitAnswer(
-          io,
-          { sessionId, username, answer, questionIndex },
+          io!,
+          { quizId, username, answer, questionIndex },
           callback,
         );
       },
     );
 
     socket.on('disconnect', () => {
-      handleDisconnected(io, socket.id);
+      handleDisconnected(io!, socket.id);
       console.log('Client disconnected');
     });
   });

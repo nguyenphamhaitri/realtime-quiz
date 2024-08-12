@@ -9,7 +9,7 @@ class QuestionService {
   }
 
   public async createQuestion(question: QuestionDto) {
-    var newQuestion = new Question({
+    const newQuestion = new Question({
       text: question.text.toLocaleLowerCase('vi-VN'),
       answer: question.answer.toLocaleLowerCase('vi-VN'),
       options: question.options.map((opt) => opt.toLocaleLowerCase('vi-VN')),
@@ -19,8 +19,7 @@ class QuestionService {
   }
 
   public async getRandomQuestions(size: number) {
-    var data = await Question.aggregate([{ $sample: { size } }]);
-
+    const data = await Question.aggregate([{ $sample: { size } }]);
     return data.map((question) => new QuestionDto(question));
   }
 }

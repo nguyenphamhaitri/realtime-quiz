@@ -9,7 +9,7 @@ router.post(
   '/',
   SchemaCreateQuiz,
   validationResultMiddleware,
-  asyncHandler(QuizController.createQuizSession),
+  asyncHandler(QuizController.createQuiz),
 );
 
 export default router;

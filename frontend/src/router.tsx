@@ -1,5 +1,6 @@
 import Layout from 'components/Layout';
-import Home from 'pages/Home';
+import HomePage from 'pages/home';
+import QuizPage from 'pages/quiz';
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 
 export const router = createBrowserRouter([
@@ -9,7 +10,11 @@ export const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <Home />,
+        element: <HomePage />,
+      },
+      {
+        path: '/quiz/:quizId',
+        element: <QuizPage />,
       },
       {
         path: '*',
